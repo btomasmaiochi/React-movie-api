@@ -1,9 +1,10 @@
 import { Container, MovieList, Movie } from "./styles";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [movies, setMovies] = useState([]);
-  const image_path = 'https://image.tmdb.org/t/p/w500';
+  const image_path = "https://image.tmdb.org/t/p/w500";
 
   useEffect(() => {
     fetch(
@@ -14,7 +15,6 @@ function Home() {
   });
 
   return (
-
     <Container>
       <h1> Popular movies </h1>
 
@@ -22,9 +22,12 @@ function Home() {
         {movies.map((movie) => {
           return (
             <Movie key={movie.id}>
-              <a href="#">
-                <img src={`${image_path}${movie.poster_path}`} alt="{movie.title}" />
-              </a>
+              <Link to={`/details/${movie.id}`}>
+                <img
+                  src={`${image_path}${movie.poster_path}`}
+                  alt="{movie.title}"
+                />
+              </Link>
               <span> {movie.title} </span>
             </Movie>
           );
